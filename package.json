@@ -13,6 +13,7 @@
     "vitest": "^0.31.4"
   },
   "scripts": {
+    "typecheck": "tsc --noEmit",
     "exercise": "tt-cli run",
     "e": "npm run exercise",
     "solution": "tt-cli run --solution",

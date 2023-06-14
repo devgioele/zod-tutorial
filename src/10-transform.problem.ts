@@ -3,10 +3,11 @@
 import { expect, it } from "vitest";
 import { z } from "zod";
 
-const StarWarsPerson = z.object({
-  name: z.string(),
-});
-//^ 🕵️‍♂️
+const StarWarsPerson = z
+  .object({
+    name: z.string(),
+  })
+  .transform(({ name }) => ({ name, nameAsArray: name.split(" ") }));
 
 const StarWarsPeopleResults = z.object({
   results: z.array(StarWarsPerson),
@@ -14,7 +15,7 @@ const StarWarsPeopleResults = z.object({
 
 export const fetchStarWarsPeople = async () => {
   const data = await fetch(
-    "https://www.totaltypescript.com/swapi/people.json",
+    "https://www.totaltypescript.com/swapi/people.json"
   ).then((res) => res.json());
 
   const parsedData = StarWarsPeopleResults.parse(data);
